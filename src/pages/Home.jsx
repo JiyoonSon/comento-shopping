@@ -1,22 +1,26 @@
+import { mockTheme1Produdcts, mockTheme2Produdcts } from "../data/mockData";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Navigation from "../components/Navigation";
 import ThemeButton from "../components/ThemeButton";
 import ProductCard from "../components/ProductCard";
 import styled from "styled-components";
-import { mockTheme1Produdcts, mockTheme2Produdcts } from "../data/mockData";
-import { useState, useEffect } from "react";
 
 const Home = () => {
   //다시 렌더링(UI그리는 거)되는 조건 값(state)
 
   const [products, setProducts] = useState();
+  const navigate = useNavigate();
 
-  // 조건에 의해서 실행되는 함수
+  // 조건에 의해서 실행되는 함수(1초 후 상품 초기화)
   useEffect(() => {
     setTimeout(() => {
       setProducts(mockTheme1Produdcts);
     }, 1000);
   }, []);
 
+  //테마버튼 클릭 event
   const onClickThemeButton = (themeId) => {
     if (themeId === 1) {
       setProducts(mockTheme1Produdcts);
@@ -49,6 +53,7 @@ const Home = () => {
         {products ? (
           products.map((product) => (
             <ProductCard
+              onClick={() => navigate(`product/${product.id}`)}
               key={product.id}
               name={product.name}
               description={product.description}

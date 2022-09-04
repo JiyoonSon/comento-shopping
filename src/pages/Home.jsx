@@ -13,7 +13,7 @@ const Home = () => {
   // 조건에 의해서 실행되는 함수
   useEffect(() => {
     setTimeout(() => {
-      console.log("1초후");
+      setProducts(mockTheme1Produdcts);
     }, 1000);
   }, []);
 
